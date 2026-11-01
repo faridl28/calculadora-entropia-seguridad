@@ -126,6 +126,49 @@ const THEMATIC_DICTIONARIES = Object.freeze({
         'subchasis', 'superbike', 'suspension', 'tacometro', 'telemetria', 'tija', 'titano', 'torica',
         'torque', 'traccion', 'transmision', 'trapezoide', 'tuboescape', 'valvula', 'variador', 'velocidad',
         'velocimetro', 'visera', 'volante', 'yamaha'
+    ]),
+
+    sports: Object.freeze([
+        'atletismo', 'baloncesto', 'beisbol', 'boxeo', 'ciclismo', 'natacion', 'tenis', 'futbol',
+        'gimnasia', 'judo', 'karate', 'maraton', 'rugby', 'surf', 'voleibol', 'alpinismo',
+        'esgrima', 'golf', 'hipica', 'hockey', 'remo', 'taekwondo', 'triatlon', 'waterpolo'
+    ]),
+
+    anime: Object.freeze([
+        'akira', 'alquimista', 'bankai', 'chakra', 'cosmo', 'dragon', 'eva', 'ghoul',
+        'gundam', 'hokage', 'hunter', 'jinchuriki', 'joestar', 'kaiju', 'katana', 'ki',
+        'mech', 'nakama', 'ninja', 'otaku', 'saiyajin', 'senpai', 'shinigami', 'stand', 'titan'
+    ]),
+
+    systems: Object.freeze([
+        'algoritmo', 'api', 'backend', 'backup', 'base', 'binario', 'cache', 'cloud',
+        'codigo', 'compilador', 'datos', 'debug', 'deploy', 'docker', 'dominio', 'encriptacion',
+        'firewall', 'frontend', 'github', 'hardware', 'hash', 'kernel', 'linux', 'log',
+        'malware', 'nodo', 'objeto', 'phishing', 'protocolo', 'puerto', 'query', 'ram',
+        'red', 'repositorio', 'router', 'script', 'servidor', 'software', 'sql', 'token'
+    ]),
+
+    houses: Object.freeze([
+        'atico', 'azotea', 'balcon', 'baño', 'bodega', 'chimenea', 'cimientos',
+        'comedor', 'corredor', 'cuarto', 'desvan', 'dormitorio', 'escalera', 'estudio', 'fachada',
+        'garaje', 'habitacion', 'jardin', 'ladrillo', 'muro', 'patio', 'pasillo', 'piscina',
+        'puerta', 'recibidor', 'sala', 'sotano', 'techo', 'terraza', 'ventana', 'viga'
+    ]),
+
+    germany: Object.freeze([
+        'baviera', 'berlin', 'bretzel', 'bundesliga', 'cerveza', 'colonia', 'danubio', 'frankfurt',
+        'hamburguesa', 'hamburgo', 'muro', 'munich', 'oktoberfest', 'rin', 'salchicha', 'selvanegra'
+    ]),
+
+    colombia: Object.freeze([
+        'aguardiente', 'amazonas', 'andes', 'arepa', 'bandeja', 'bogota', 'cafe', 'cali',
+        'cartagena', 'chiva', 'cucuta', 'cumbia', 'empanada', 'guatape', 'llanero', 'medellin',
+        'orquidea', 'paisa', 'salsa', 'santander', 'sombrero', 'tayrona', 'vallenato'
+    ]),
+
+    wonders: Object.freeze([
+        'acropolis', 'alhambra', 'angkor', 'chichen', 'coliseo', 'cristo', 'giza',
+        'machu', 'moai', 'petra', 'piramide', 'stonehenge', 'tajmahal', 'teotihuacan'
     ])
 });
 
@@ -145,7 +188,7 @@ class CryptoService {
      */
     static getCrypto() {
         const cryptoInstance = (typeof window !== 'undefined' && (window.crypto || window.msCrypto)) ||
-                               (typeof globalThis !== 'undefined' && globalThis.crypto);
+            (typeof globalThis !== 'undefined' && globalThis.crypto);
 
         if (!cryptoInstance || typeof cryptoInstance.getRandomValues !== 'function') {
             throw new Error('[Security Exception] CSPRNG no disponible: window.crypto.getRandomValues es requerido.');

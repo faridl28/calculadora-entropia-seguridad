@@ -16,9 +16,25 @@ body {
 .header {
     background-color: var(--rm-navy);
     color: var(--rm-white);
-    padding: 1.5rem;
-    text-align: center;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Separa los escudos a los bordes y el texto al centro */
     border-bottom: 4px solid var(--rm-gold);
+}
+
+.header-text {
+    text-align: center;
+    flex-grow: 1;
+}
+
+.header-shield {
+    height: 80px;
+    /* Ajusta según la resolución de tu imagen PNG */
+    width: auto;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+    /* Sombra para dar profundidad al escudo */
 }
 
 .logo-placeholder {
