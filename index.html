@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Vault - RMFC Edition</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo-placeholder">RMFC Security</div>
+        <h1>Analizador y Generador de Entropía</h1>
+    </header>
+
+    <main class="container">
+        <!-- Módulo 1: Calculadora de Entropía -->
+        <section class="card">
+            <h2>Calculadora de Entropía</h2>
+            <div class="form-group">
+                <label for="password-input">Ingresa la contraseña a evaluar:</label>
+                <input type="text" id="password-input" placeholder="Ej. RealMadrid1902!">
+                <button id="btn-analyze" class="btn-primary">Analizar Seguridad</button>
+            </div>
+            <div class="result-box">
+                <p>Bits de entropía: <span id="entropy-result">0</span></p>
+                <p>Nivel de seguridad: <span id="security-level">-</span></p>
+            </div>
+        </section>
+
+        <!-- Módulo 2: Generador Temático -->
+        <section class="card">
+            <h2>Generador Temático</h2>
+            <div class="form-group">
+                <label for="theme-select">Selecciona el diccionario de entropía:</label>
+                <select id="theme-select">
+                    <option value="english">Inglés</option>
+                    <option value="spanish">Español</option>
+                    <option value="cooking">Términos de Cocina</option>
+                    <option value="motorcycles">Motos</option>
+                </select>
+                <button id="btn-generate" class="btn-secondary">Generar Contraseña</button>
+            </div>
+            <div class="result-box">
+                <p>Contraseña: <span id="generated-password" class="highlight">-</span></p>
+                <p>Entropía garantizada: <span id="generated-entropy">0</span> bits</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/entropy.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

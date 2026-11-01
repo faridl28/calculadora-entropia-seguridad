@@ -1,0 +1,129 @@
+:root {
+    --rm-white: #FFFFFF;
+    --rm-navy: #0A173B;
+    --rm-gold: #EEB902;
+    --rm-gray: #F0F2F5;
+    --text-dark: #333333;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--rm-gray);
+    color: var(--text-dark);
+}
+
+.header {
+    background-color: var(--rm-navy);
+    color: var(--rm-white);
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 4px solid var(--rm-gold);
+}
+
+.logo-placeholder {
+    font-size: 0.9rem;
+    color: var(--rm-gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 900px;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+    .container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.card {
+    background-color: var(--rm-white);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-top: 3px solid var(--rm-navy);
+}
+
+h2 {
+    color: var(--rm-navy);
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+input,
+select {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--rm-gold);
+    box-shadow: 0 0 0 2px rgba(238, 185, 2, 0.2);
+}
+
+button {
+    padding: 0.8rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--rm-navy);
+    color: var(--rm-white);
+}
+
+.btn-primary:hover {
+    background-color: #0d2154;
+}
+
+.btn-secondary {
+    background-color: var(--rm-gold);
+    color: var(--rm-navy);
+}
+
+.btn-secondary:hover {
+    background-color: #dca802;
+}
+
+.result-box {
+    background-color: var(--rm-gray);
+    padding: 1rem;
+    border-radius: 4px;
+    border-left: 4px solid var(--rm-gold);
+}
+
+.result-box p {
+    margin: 0.5rem 0;
+    font-weight: 500;
+}
+
+.highlight {
+    font-family: monospace;
+    font-size: 1.2rem;
+    color: var(--rm-navy);
+    word-break: break-all;
+}
