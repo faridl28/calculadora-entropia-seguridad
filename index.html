@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Security Vault - RMFC Edition</title>
+    <title>Security Vault - RMFC Edition | Calculadora de Entropía Criptográfica</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -12,20 +12,22 @@
     <header class="header">
         <img src="assets/rmfc-shield.png" alt="Escudo Izquierdo" class="header-shield">
         <div class="header-text">
-            <div class="logo-placeholder">RMFC Security</div>
-            <h1>Analizador y Generador de Entropía</h1>
+            <div class="logo-placeholder">RMFC Security Vault</div>
+            <h1>Analizador, Creador y Generador de Entropía</h1>
         </div>
         <img src="assets/rmfc-shield.png" alt="Escudo Derecho" class="header-shield">
     </header>
 
     <main class="container">
         <!-- Módulo 1: Calculadora de Entropía -->
-        <section class="card">
-            <h2>Calculadora de Entropía</h2>
+        <section class="card" aria-labelledby="heading-analyzer">
+            <h2 id="heading-analyzer">Calculadora de Entropía</h2>
             <div class="form-group">
                 <label for="password-input">Ingresa la contraseña a evaluar:</label>
-                <input type="text" id="password-input" placeholder="Ej. RealMadrid1902!">
-                <button id="btn-analyze" class="btn-primary">Analizar Seguridad</button>
+                <div class="input-with-action">
+                    <input type="text" id="password-input" placeholder="Ej. RealMadrid1902!">
+                    <button id="btn-analyze" class="btn-primary">Analizar Seguridad</button>
+                </div>
             </div>
             <div class="result-box">
                 <p>Bits de entropía: <span id="entropy-result">0</span></p>
@@ -33,32 +35,242 @@
             </div>
         </section>
 
-        <!-- Módulo 2: Generador Temático -->
-        <section class="card">
-            <h2>Generador Temático</h2>
+        <!-- Módulo 2: Generador Temático con IA Dinámica -->
+        <section class="card" aria-labelledby="heading-thematic">
+            <h2 id="heading-thematic">Generador Temático (IA)</h2>
             <div class="form-group">
-                <label for="theme-select">Selecciona el diccionario de entropía:</label>
-                <select id="theme-select">
-                    <option value="english">Inglés</option>
-                    <option value="spanish">Español</option>
-                    <option value="cooking">Términos de Cocina</option>
-                    <option value="motorcycles">Motos</option>
-                    <option value="sports">Deportes</option>
-                    <option value="anime">Anime</option>
-                    <option value="systems">Ingeniería de Sistemas</option>
-                    <option value="houses">Casas</option>
-                    <option value="germany">Alemania</option>
-                    <option value="colombia">Colombia</option>
-                    <option value="wonders">Maravillas del Mundo</option>
-                </select>
-                <button id="btn-generate" class="btn-secondary">Generar Contraseña</button>
+                <label for="theme-input">Ingresa un tema libre para el diccionario (IA):</label>
+                <div class="input-with-action">
+                    <input type="text" id="theme-input" placeholder="Ej. Fortnite, Minecraft, Ciberseguridad...">
+                    <button id="btn-generate" class="btn-secondary">Generar Contraseña</button>
+                </div>
             </div>
+
+            <!-- Estado de carga para la promesa de Gemini/Mock -->
+            <div id="theme-loading" class="loading-state hidden" aria-live="polite">
+                <span class="spinner" aria-hidden="true"></span>
+                <span class="loading-text">Extrayendo 20 palabras temáticas con IA...</span>
+            </div>
+
             <div class="result-box">
                 <p>Contraseña: <span id="generated-password" class="highlight">-</span></p>
                 <p>Entropía garantizada: <span id="generated-entropy">0</span> bits</p>
+                <div id="theme-dictionary-info" class="theme-dictionary-info hidden">
+                    <p class="dict-title">Diccionario dinámico generado (20 palabras):</p>
+                    <div id="words-chips" class="words-chips"></div>
+                </div>
             </div>
         </section>
+
+        <!-- Módulo 3: Módulo de Creación Interactiva -->
+        <section class="card creator-card" aria-labelledby="heading-creator">
+            <h2 id="heading-creator">Creador de Contraseña Seguro</h2>
+            <div class="form-group">
+                <label for="creator-password">Diseña y comprueba tu contraseña en tiempo real:</label>
+                <div class="password-wrapper">
+                    <input type="password" id="creator-password" placeholder="Escribe aquí tu nueva contraseña..."
+                        autocomplete="new-password">
+                    <button type="button" id="toggle-creator-visibility" class="btn-toggle-eye"
+                        title="Mostrar/Ocultar contraseña" aria-label="Mostrar u ocultar contraseña">👁️</button>
+                </div>
+            </div>
+
+            <!-- Medidor visual de fortaleza (0% a 100%) -->
+            <div class="meter-wrapper">
+                <div class="meter-header">
+                    <span>Fortaleza visual: <strong id="creator-percent-label">0%</strong></span>
+                    <span>Entropía: <strong id="creator-entropy-label">0.00</strong> bits (<span
+                            id="creator-level-label">Débil</span>)</span>
+                </div>
+                <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                    id="strength-progressbar">
+                    <div id="creator-progress-bar" class="progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- Sugerencias dinámicas según evaluación de entropía en tiempo real -->
+            <div class="suggestions-container">
+                <h3>Sugerencias Criptográficas Dinámicas:</h3>
+                <ul id="creator-suggestions" class="suggestions-list" aria-live="polite">
+                    <li class="suggestion-item info">Comienza a escribir una contraseña para evaluarla en tiempo real.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Módulo 4: Bloque Teórico de Seguridad y Criptografía -->
+        <section class="card theory-card" aria-labelledby="heading-theory">
+            <header class="theory-header">
+                <span class="badge-theory">Marco Teórico y Fundamentos</span>
+                <h2 id="heading-theory">Fundamentos Criptográficos de Entropía y Pseudoaleatoriedad</h2>
+                <p class="theory-intro">
+                    Comprender los principios matemáticos subyacentes a la seguridad de claves es vital para diseñar
+                    sistemas de autenticación resistentes a ataques criptoanalíticos y de fuerza bruta exhaustiva.
+                </p>
+            </header>
+
+            <article class="theory-section">
+                <h3>1. Entropía de Shannon y la Ecuación Fundamental</h3>
+                <p>
+                    En teoría de la información y criptografía aplicada, la <strong>entropía de Shannon /
+                        Hartley</strong> cuantifica el grado de incertidumbre, predictibilidad o "sorpresa" inherente a
+                    una contraseña o clave criptográfica generada de manera uniforme e independiente.
+                </p>
+                <div class="formula-box" role="region" aria-label="Fórmula de Entropía">
+                    <div class="formula-title">Fórmula de Entropía de Hartley / Shannon:</div>
+                    <div class="math-display">
+                        E = L &times; log<sub>2</sub>(R)
+                    </div>
+                </div>
+                <p>Donde cada término representa:</p>
+                <ul class="theory-breakdown-list">
+                    <li>
+                        <strong>E (Entropía total en bits):</strong> Medida escalar de la fuerza criptográfica. Una
+                        contraseña con \(E\) bits de entropía requiere teóricamente un promedio de \(2^{E-1}\) intentos
+                        (un espacio total de \(2^E\) estados) para ser descifrada mediante una búsqueda exhaustiva por
+                        fuerza bruta.
+                    </li>
+                    <li>
+                        <strong>L (Longitud de la contraseña):</strong> Número total de caracteres independientes que
+                        conforman la cadena. Su impacto sobre la seguridad es de orden <em>exponencial</em> en el
+                        espacio de combinaciones (\(R^L\)), lo que significa que aumentar la longitud es la técnica más
+                        efectiva para mitigar ataques.
+                    </li>
+                    <li>
+                        <strong>R (Cardinalidad del conjunto de caracteres / Pool Size):</strong> Tamaño del alfabeto
+                        equiprobable disponible del cual se selecciona cada carácter. En los sistemas modernos:
+                        <div class="cardinality-grid">
+                            <span class="chip-pool">Minúsculas [a-z]: 26</span>
+                            <span class="chip-pool">Mayúsculas [A-Z]: 26</span>
+                            <span class="chip-pool">Dígitos [0-9]: 10</span>
+                            <span class="chip-pool">Símbolos Especiales: 33</span>
+                            <span class="chip-pool total">Espacio Total ASCII: 95</span>
+                        </div>
+                    </li>
+                    <li>
+                        <strong>log<sub>2</sub>(R) (Bits de entropía por posición):</strong> Representa el número de
+                        bits que aporta cada carácter según el tamaño del conjunto del que proviene. Por ejemplo:
+                        \(\log_2(26) \approx 4.70\) bits, \(\log_2(62) \approx 5.95\) bits, \(\log_2(95) \approx 6.57\)
+                        bits.
+                    </li>
+                </ul>
+
+                <div class="callout callout-nist">
+                    <strong>Estándares NIST SP 800-63B:</strong>
+                    Se considera que una contraseña con menos de <strong>60 bits</strong> es <em>Débil</em> (vulnerable
+                    a GPUs y tablas hash offline); entre <strong>60 y 79.99 bits</strong> es <em>Fuerte</em>; y a partir
+                    de <strong>80 bits</strong> se cataloga como <em>Segura</em>, haciendo inviable computacionalmente
+                    cualquier ataque de fuerza bruta directa en horizontes temporales convencionales.
+                </div>
+            </article>
+
+            <article class="theory-section">
+                <h3>2. CSPRNG: Por qué <code>window.crypto.getRandomValues()</code> en lugar de
+                    <code>Math.random()</code>
+                </h3>
+                <p>
+                    En el desarrollo web estándar, la función nativa <code>Math.random()</code> es ampliamente utilizada
+                    para simulaciones simples o efectos visuales, pero constituye una <strong>vulnerabilidad crítica de
+                        seguridad</strong> si se emplea en criptografía, tokens de sesión o generación de contraseñas.
+                </p>
+
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Característica</th>
+                                <th><code>Math.random()</code> (PRNG Inseguro)</th>
+                                <th><code>window.crypto.getRandomValues()</code> (CSPRNG)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Tipo de Generador</strong></td>
+                                <td>PRNG Determinista (ej. xoshiro128**, PCG, Mersenne Twister).</td>
+                                <td>CSPRNG Criptográficamente Seguro certificado.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fuente de Entropía</strong></td>
+                                <td>Semilla inicial interna en memoria con estado pequeño (128 bits).</td>
+                                <td>Ruido físico del Sistema Operativo (interrupciones de disco, reloj, red,
+                                    <code>/dev/urandom</code>, <code>BCryptGenRandom</code>).
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Resistencia a la Reconstrucción</strong></td>
+                                <td><strong>Nula:</strong> Tras observar pocas salidas consecutivas, un atacante puede
+                                    reconstruir el estado interno y predecir todas las contraseñas pasadas y futuras.
+                                </td>
+                                <td><strong>Garantizada:</strong> Resistencia a la predicción hacia adelante y hacia
+                                    atrás (Forward Secrecy / Backtrack Resistance).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <article class="theory-section">
+                <h3>3. Mitigación del Sesgo de Módulo (Modulo Bias) mediante Rejection Sampling</h3>
+                <p>
+                    Un error criptográfico frecuente al convertir un entero aleatorio grande a un rango específico \([0,
+                    N-1]\) (como un diccionario de \(N\) palabras o un pool de caracteres) es aplicar directamente la
+                    operación módulo: <code>candidato % N</code>.
+                </p>
+
+                <div class="danger-box">
+                    <strong>¿Por qué existe el Sesgo de Módulo (Modulo Bias)?</strong>
+                    <p>
+                        La llamada <code>crypto.getRandomValues(new Uint32Array(1))</code> genera un entero de 32 bits
+                        sin signo distribuido uniformemente en el intervalo semiabierto \([0, 2^{32})\), donde \(2^{32}
+                        = 4{,}294{,}967{,}296\).
+                    </p>
+                    <p>
+                        Si \(2^{32}\) no es divisible exactamente entre \(N\) (es decir, \(2^{32} \pmod N \neq 0\)), los
+                        primeros \(2^{32} \pmod N\) valores del rango \([0, N-1]\) tendrán una probabilidad mayor de ser
+                        seleccionados:
+                    </p>
+                    <div class="math-display small">
+                        P(\text{valor favorecido}) = \frac{\lfloor 2^{32}/N \rfloor + 1}{2^{32}} \quad > \quad
+                        P(\text{valor restante}) = \frac{\lfloor 2^{32}/N \rfloor}{2^{32}}
+                    </div>
+                    <p>
+                        Esta ligera asimetría destruye la equiprobabilidad matemática, permitiendo ataques de canal
+                        lateral o ataques probabilísticos basados en distribución sesgada.
+                    </p>
+                </div>
+
+                <h4>Solución Criptográfica: Muestreo por Rechazo (Rejection Sampling)</h4>
+                <p>
+                    Para erradicar por completo este sesgo, la clase <code>CryptoService</code> implementa
+                    <strong>Rejection Sampling</strong>:
+                </p>
+                <ol class="steps-list">
+                    <li>
+                        Calcula el mayor múltiplo de \(N\) menor o igual a \(2^{32}\):
+                        <br>
+                        <code>limit = Math.floor(2^32 / N) * N</code>
+                    </li>
+                    <li>
+                        Genera un número de 32 bits <code>candidate</code> con CSPRNG.
+                    </li>
+                    <li>
+                        <strong>Condición de rechazo:</strong> Si <code>candidate &ge; limit</code>, el valor cae en la
+                        "zona sesgada" y se descarta inmediatamente, repitiendo el muestreo en un bucle seguro.
+                    </li>
+                    <li>
+                        Si <code>candidate &lt; limit</code>, se acepta y se calcula <code>candidate % N</code>,
+                        asegurando que cada una de las \(N\) posibilidades provenga de un conjunto exactamente idéntico
+                        de opciones equiprobables.
+                    </li>
+                </ol>
+            </article>
+        </section>
     </main>
+
+    <footer class="footer">
+        <p>Security Vault &copy; RMFC Edition &mdash; Diseñado bajo principios OWASP, NIST SP 800-63B y Clean
+            Architecture.</p>
+    </footer>
 
     <script src="js/entropy.js"></script>
     <script src="js/main.js"></script>
